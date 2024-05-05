@@ -17,12 +17,16 @@ app.get('/', (req, res) => {
    res.render('welcome-page');
 })
 
-app.get('/employeeSignin', (req, res) => {
-    res.send('<h1>Employees Signin</h1>')
+// employee signin
+app.get('/employeeLogins', (req, res) => {
+  //  res.send('<h1>Employees Signin</h1>')
+    res.render('em-login');
 })
 
-app.get('/donorSignin', (req, res) => {
-    res.send('<h1>Donor Signin</h1>');
+// donors signin
+app.get('/donorLogins', (req, res) => {
+   // res.send('<h1>Donor Signin</h1>');
+    res.render('donor-login');
 })
 
 app.get('/data-input', (req, res) => {
