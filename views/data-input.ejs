@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Input Form</title>
+</head>
+<style>
+    div{
+        padding: 10px;
+    }
+</style>
+<body>
+    <form>
+        <div class="container">
+
+            <h2>
+                Enter stuff:
+            </h2>
+            <div>
+                <select name="data-input" id="data-input">
+                    <option value="Canned Goods">Canned Goods</option>
+                    <option value="Veggies">Veggies</option>
+                    <option value="Fruits">Fruits</option>
+                </select>
+            </div>
+            <div>
+                <select name="quantity" id="quantity">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+
+                </select>
+            </div>
+
+
+        </div>
+        <button class="btn" id="submitBtn" type="button">Submit</button>  
+
+    </form>
+    <div>
+        <div id="label-here"></div>
+    </div>
+    <script src="sendlabel.js"></script>
+</body>
+</html>
