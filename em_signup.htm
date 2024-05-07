@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Food Bank Donations Employee Sign Up Page</title>
+</head> 
+<style>
+*{
+		margin: 0;
+    		padding: 0;
+		box-sizing: border-box;
+		font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	}
+	body{
+    		display: flex;
+    		justify-content: center;
+    		align-items: center;
+    		min-height: 100vh;
+    		background: #FBC4AB;
+	}
+	.signup-box{
+    		display: flex;
+    		justify-content: center;
+    		flex-direction: column;
+    		width: 440px;
+    		height: 480px;
+    		padding: 30px;
+	}
+	.signup-header{
+    		text-align: center;
+    		margin: 20px 0 40px 0;
+	} 
+	.signup-header header{
+    		color: #69271E;
+    		font-size: 30px;
+    		font-weight: 600;
+	}
+	.input-box .input-field{
+    		width: 100%;
+    		height: 60px;
+    		font-size: 17px;
+    		padding: 0 25px;
+    		margin-bottom: 15px;
+    		border-radius: 30px;
+    		border: none;
+    		box-shadow: 0px 5px 10px 1px rgba(0,0,0, 0.05);
+    		outline: none;
+    		transition: .3s;
+	}
+	::placeholder{
+    		font-weight: 500;
+    		color: #69271E;
+	}
+	.input-field:focus{
+    		width: 105%;
+	}
+	
+	section{
+    		display: flex;
+    		align-items: center;
+    		font-size: 14px;
+    		color: #69271E;
+	}
+	#check{
+    		margin-right: 10px;
+	}
+	a{
+    		text-decoration: none;
+	}
+	a:hover{
+    		text-decoration: underline;
+	}
+	section a{
+    		color: #69271E;
+	}
+	.input-submit{
+    		position: relative;
+	}
+	.submit-btn{
+    		width: 100%;
+    		height: 60px;
+    		background: #69271E;
+    		border: none;
+    		border-radius: 30px;
+    		cursor: pointer;
+    		transition: .3s;
+	}
+	.input-submit label{
+    		position: absolute;
+    		top: 45%;
+    		left: 50%;
+    		color: #fff;
+    		-webkit-transform: translate(-50%, -50%);
+    		-ms-transform: translate(-50%, -50%);
+    		transform: translate(-50%, -50%);
+    		cursor: pointer;
+	}
+	.submit-btn:hover{
+   		background: #69271E;
+   	 	transform: scale(1.05,1);
+	}
+	p {
+  		text-align: center;
+  		padding-top: 20px;
+  		font-size: 15px;
+	}
+	p1 {
+  		text-align: center;
+  		padding-bottom: 10px;
+  		font-size: 15px;
+	}
+	form{
+    		text-align: center;
+    		color: #222;
+  		font-size: 15px;
+  		margin-top: 10px;
+	}
+	.check{
+    		margin-left: 5px;
+	}
+	.para-2 {
+  		text-align: center;
+  		color: #222;
+  		font-size: 15px;
+  		margin-top: -10px;
+		}
+	.para-2 a {
+  		color: #69271E;
+		}
+</style>
+<body>
+<div class="signup-box">
+      	<div class="signup-header">
+            <header>New Employee? Sign Up Here:</header>
+        </div>
+	<form action="em-login.htm">
+	<div class="input-box">
+	<input type="text" class="input-field" id="employeeId" placeholder="Employee ID" autocomplete="off" required>
+        </div>
+	<p1>
+	Remember to save this ID! It is your Employee ID, you will need it when logging in!
+	</p1>
+	 <div class="input-box">
+            <input type="text" class="input-field" placeholder="First Name" autocomplete="off" required>
+        </div>
+	<div class="input-box">
+            <input type="text" class="input-field" placeholder="Last Name" autocomplete="off" required>
+        </div>
+        <div class="input-box">
+            <input type="text" class="input-field" placeholder="Email" autocomplete="off" required>
+        </div>
+	 <div class="input-box">
+            <input type="password" class="input-field" placeholder="Password" autocomplete="off" required>
+        </div>
+	<form action="em-login.htm">
+        <div class="input-submit">
+            <button class="submit-btn" id="submit"></button>
+            <label for="submit">Sign Up</label>
+        </div>
+	<p>
+        By clicking the Sign Up button,you agree to our <br />
+         <a href="terms.htm">Terms and Conditions</a> and <a href="privacy.htm">Policy Privacy.</a>
+      	</p>
+ 	     <input type="checkbox" id="check" required>
+             <label for="check">I have saved a copy of my Employee ID</label>
+	</form>
+	
+    <p class="para-2">
+      Already have an account? <a href="em-login.htm">Login here</a>
+    </p>
+    </div>
+    <script>
+        // Function to generate employee ID
+        function generateEmployeeId() {
+            // Generate a random string of 6 characters
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            var employeeId = '';
+            for (var i = 0; i < 6; i++) {
+                employeeId += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return employeeId;
+        }
+
+        // Set generated employee ID to input field
+        document.getElementById('employeeId').value = generateEmployeeId();
+	document.getElementById("check").required = true;
+    </script>
+</body>
+</html>
+
