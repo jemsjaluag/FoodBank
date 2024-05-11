@@ -3,10 +3,11 @@ const PORT = 8000;
 
 const app = express();
 
+const path = require('path');
 app.use(express.json());
 
 // serving public file
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'ejs');
 
@@ -18,13 +19,13 @@ app.get('/', (req, res) => {
 })
 
 // employee signin
-app.get('/employeeLogins', (req, res) => {
+app.get('/employeeLoginPage', (req, res) => {
   //  res.send('<h1>Employees Signin</h1>')
     res.render('em-login');
 })
 
 // donors signin
-app.get('/donorLogins', (req, res) => {
+app.get('/donorLoginPage', (req, res) => {
    // res.send('<h1>Donor Signin</h1>');
     res.render('donor-login');
 })

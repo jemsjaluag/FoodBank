@@ -80,7 +80,7 @@ class DBController {
         this.#sequelize.sync().then(() => {
             console.log('Tables created sucessfully');
         }).catch((error)=> {
-            console.error('Unable to create tables.');
+            console.error('Unable to create tables.', error);
         })
 
     }
