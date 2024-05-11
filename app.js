@@ -3,14 +3,20 @@ const PORT = 8000;
 
 const app = express();
 
-const path = require('path');
 app.use(express.json());
 
 // serving public file
+const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'ejs');
 
+ ///// routes
+const employeeRoutes = require('./routes/Employees');
+const donorRoutes = require('./routes/Donors')
+
+app.use('/employees', employeeRoutes);
+app.use('/donors', donorRoutes);
 
 
 app.get('/', (req, res) => {
@@ -28,6 +34,10 @@ app.get('/employeeLoginPage', (req, res) => {
 app.get('/donorLoginPage', (req, res) => {
    // res.send('<h1>Donor Signin</h1>');
     res.render('donor-login');
+})
+
+app.get('/donorSignupPage' , (req, res) => {
+    res.render('donor-signup');
 })
 
 app.get('/data-input', (req, res) => {

@@ -5,10 +5,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Food Bank Donations Donor Page</title>
-</head>
+	<title>Food Bank Donations Donor Sign Up Page</title>
+</head> 
 <style>
-	*{
+*{
 		margin: 0;
     		padding: 0;
 		box-sizing: border-box;
@@ -21,7 +21,7 @@
     		min-height: 100vh;
     		background: #FBC4AB;
 	}
-	.login-box{
+	.signup-box{
     		display: flex;
     		justify-content: center;
     		flex-direction: column;
@@ -29,11 +29,11 @@
     		height: 480px;
     		padding: 30px;
 	}
-	.login-header{
+	.signup-header{
     		text-align: center;
     		margin: 20px 0 40px 0;
 	} 
-	.login-header header{
+	.signup-header header{
     		color: #69271E;
     		font-size: 30px;
     		font-weight: 600;
@@ -54,14 +54,10 @@
     		font-weight: 500;
     		color: #69271E;
 	}
-		.input-field:focus{
+	.input-field:focus{
     		width: 105%;
 	}
-	.forgot{
-    		display: flex;
-    		justify-content: space-between;
-    		margin-bottom: 40px;
-	}
+	
 	section{
     		display: flex;
     		align-items: center;
@@ -103,49 +99,79 @@
     		cursor: pointer;
 	}
 	.submit-btn:hover{
-   		background: #fff;
+   		background: #69271E;
    	 	transform: scale(1.05,1);
 	}
-	.sign-up-link{
+	p {
+  		text-align: center;
+  		padding-top: 20px;
+  		font-size: 15px;
+	}
+	p1 {
+  		text-align: center;
+  		padding-bottom: 10px;
+  		font-size: 15px;
+	}
+	form{
     		text-align: center;
-    		font-size: 15px;
-    		margin-top: 20px;
+    		color: #222;
+  		font-size: 15px;
+  		margin-top: 10px;
 	}
-	.sign-up-link a{
-    		color: #69271E;
-   		font-weight: 600;
+	.check{
+    		margin-left: 5px;
 	}
+	.para-2 {
+  		text-align: center;
+  		color: #222;
+  		font-size: 15px;
+  		margin-top: -10px;
+		}
+	.para-2 a {
+  		color: #69271E;
+		}
 </style>
 <body>
-	<div class="login-box">
-        <div class="login-header">
-            <header>Welcome Donors! Login:</header>
+<div class="signup-box">
+      	<div class="signup-header">
+            <header>New Donor? Sign Up Here:</header>
+        </div>
+	<form action="donor-login.htm">
+	<div class="input-box">
+	<input type="text" class="input-field" id="donorId" placeholder="Donor ID" autocomplete="off" required>
+        </div>
+	<p1>
+	Remember to save this ID! It is your Donor ID, you will need it when logging in!
+	</p1>
+	 <div class="input-box">
+            <input type="text" class="input-field" placeholder="First Name" autocomplete="off" required>
+        </div>
+	<div class="input-box">
+            <input type="text" class="input-field" placeholder="Last Name" autocomplete="off" required>
         </div>
         <div class="input-box">
             <input type="text" class="input-field" placeholder="Email" autocomplete="off" required>
         </div>
-	<div class="input-box">
-            <input type="donor id" class="input-field" placeholder="Donor ID" autocomplete="off" required>
-        </div>
 	 <div class="input-box">
             <input type="password" class="input-field" placeholder="Password" autocomplete="off" required>
         </div>
-        <div class="forgot">
-            <section>
-                <input type="checkbox" id="check">
-                <label for="check">Remember me</label>
-            </section>
-            <section>
-                <a href="#">Forgot password</a>
-            </section>
-        </div>
+         
         <div class="input-submit">
             <button class="submit-btn" id="submit"></button>
-            <label for="submit">Sign In</label>
+            <label for="submit">Sign Up</label>
         </div>
-	<div class="sign-up-link">
-            <p>Don't have an account? <a href="/donors/signup-page">Sign Up</a></p>
-        </div>
+	<p>
+        By clicking the Sign Up button,you agree to our <br />
+         <a href="terms.htm">Terms and Conditions</a> and <a href="privacy.htm">Policy Privacy.</a>
+      	</p>
+ 	     <input type="checkbox" id="check" required>
+             <label for="check">I have saved a copy of my Donor ID</label>
+	</form>
+    <p class="para-2">
+      Already have an account? <a href="donor-login.htm">Login here</a>
+    </p>
     </div>
+
+ <script src="/donor-signup-script.js"></script>
 </body>
 </html>

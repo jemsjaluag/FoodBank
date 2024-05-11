@@ -57,13 +57,25 @@ class DBController {
             email: {
                 type: DataTypes.STRING,
                 allowNull: false
+            },
+            donorID: {
+                type: DataTypes.STRING,
+                allowNull: false
             }
         });
 
 
         // define employee model
         this.#Employee = this.#sequelize.define('employees', {
-            employee: {
+            employeeEmail: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            employeeFirst: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            employeeLast: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
@@ -86,14 +98,15 @@ class DBController {
     }
 
     // insert a User
-    async User_insert(user, pword, pNumber, email) {
+    async User_insert(donFirst, donLast, donPass, donEmail, donID) {
         this.#sequelize.sync();
 
         await this.#User.create({
-            username: user,
-            password: pword,
-            phoneNumber: pNumber,
-            email: email
+            donorFirst: donFirst,
+            donorLast: donLast,
+            donorPassword: donPass,
+            donorEmail: donEmail,
+            donorID: donID
 
         }).then(() => {
             console.log(`User ${user} added.`);
@@ -101,13 +114,13 @@ class DBController {
     };
 
     // retrieve a User
-    async User_select(user, pword) {
+    async User_select(donEmail, donPass) {
         this.#sequelize.sync();
 
         let result = await this.#User.findOne({
             where: {
-                username: user,
-                password: pword
+                donorEmail: donEmail,
+                donorPassword: donPass
             },
             raw: true
         }).catch((error) => {
@@ -125,13 +138,15 @@ class DBController {
     };
 
     // insert an Employee
-    async Employee_insert(user, pword, employeeID) {
+    async Employee_insert(empFirst, empLast, empPass, empEmail, empID) {
         this.#sequelize.sync();
 
         await this.#Employee.create({
-            employee: user,
-            password: pword,
-            employeeID: employeeID
+            employeeEmail: empEmail,
+            employeePassword: empPass,
+            employeeID: empID,
+            employeeFirst: empFirst,
+            employeeLast: empLast
 
         }).then(() => {
             console.log(`User ${user} added.`);
@@ -139,13 +154,14 @@ class DBController {
     };
 
     // retrieve an Employee
-    async Employee_select(user, pword) {
+    async Employee_select(empEmail, empPass, empID) {
         this.#sequelize.sync();
 
         let result = await this.#Employee.findOne({
             where: {
-                username: user,
-                password: pword
+                employeeEmail: empEmail,
+                employeePassword: empPass,
+                employeeID: empID
             },
             raw: true
         }).catch((error) => {
