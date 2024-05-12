@@ -42,19 +42,19 @@ class DBController {
 
         // define the user model
         this.#User = this.#sequelize.define('user', {
-            username: {
+            donorFirst: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            password: {
+            donorLast: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            phoneNumber: {
+            donorPassword: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            email: {
+            donorEmail: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
@@ -98,29 +98,36 @@ class DBController {
     }
 
     // insert a User
-    async User_insert(donFirst, donLast, donPass, donEmail, donID) {
+    async User_insert(donorCreds) {
         this.#sequelize.sync();
 
+        console.log('Donor:');
+        console.log(donorCreds);
+
+        
         await this.#User.create({
-            donorFirst: donFirst,
-            donorLast: donLast,
-            donorPassword: donPass,
-            donorEmail: donEmail,
-            donorID: donID
+            donorFirst: donorCreds.donFirst,
+            donorLast: donorCreds.donLast,
+            donorPassword: donorCreds.donPass,
+            donorEmail: donorCreds.donEmail,
+            donorID: donorCreds.donId
 
         }).then(() => {
-            console.log(`User ${user} added.`);
+            console.log(`User ${donorFirst} added.`);
         });
+        
+        // report
+        
+
     };
 
     // retrieve a User
-    async User_select(donEmail, donPass) {
+    async User_findUser(donEmail) {
         this.#sequelize.sync();
 
         let result = await this.#User.findOne({
             where: {
                 donorEmail: donEmail,
-                donorPassword: donPass
             },
             raw: true
         }).catch((error) => {
@@ -132,9 +139,10 @@ class DBController {
             return {detected: false, res: null};
         }
         else {
-            console.log(`User retrieved: ${result.username}`);
+            console.log(`User with the email ${donEmail} exists!`);
             return {detected: true, res: result};
         }
+
     };
 
     // insert an Employee
@@ -177,6 +185,11 @@ class DBController {
             return {detected: true, res: result};
         }
     };
+
+    // close all connections
+    async closeConnection(){
+        await this.#sequelize.close();
+    }
     
 }
 
