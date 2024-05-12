@@ -114,7 +114,7 @@ class DBController {
             donorID: donorCreds.donId
 
         }).then(() => {
-            console.log(`User ${donorFirst} added.`);
+            console.log(`User ${donorCreds.donFirst} added.`);
         });
         
         // report

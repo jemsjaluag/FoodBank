@@ -16,9 +16,11 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     const credentials = req.body;
     const password = credentials.password;
+    const email = credentials.email;
+    const donorid = credentials.donorid;
 
     // find email first
-    const user = await database.User_findUser(credentials.email);
+    const user = await database.User_findUser(email, donorid);
 
     if (!user.detected) {
         console.log(`Email ${credentials.email} not found!`);
@@ -29,7 +31,7 @@ router.post('/login', async (req, res) => {
     else {
         // get hashed password and ID
         console.log(`Email ${credentials.email} found!`);
-        const creds = await database.User_select(credentials.email);
+        const creds = await database.User_select(email, donorid);
         const hashedPassword = creds.password;
 
         console.log(`Password: ${password} Hashed: ${hashedPassword}`);
