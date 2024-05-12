@@ -56,10 +56,7 @@ router.post('/login', async (req, res) => {
             res.status(403).send('Invalid password');
             return;
         }
-
-
     }
-
 })
 
 // get signup page

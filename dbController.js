@@ -232,7 +232,7 @@ class DBController {
             return {detected: false, res: null};
         }
         else {
-            console.log(`User retrieved: ${result.username}`);
+            console.log(`User retrieved: ${result.employeeEmail}`);
             return {detected: true,
                     password: result.employeePassword,
                     employeeid: result.employeeID};

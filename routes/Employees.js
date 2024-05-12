@@ -10,6 +10,55 @@ router.get('/login', (req, res) => {
     res.render('em-login');
 })
 
+router.post('/login', async (req, res) => {
+    const credentials = req.body;
+    const email = credentials.email;
+    const password = credentials.password;
+    const empid = credentials.employeeid;
+
+    // find email first
+    const user = await database.Employee_findUser(email, empid);
+
+    // if user's email is not in db
+    if (!user.detected) {
+        console.log(`Email ${credentials.email} not found!`);
+        res.status(404).send('User not found!');
+        return;
+    }
+    // if username exists
+    else {
+        // get hashed password and ID
+        console.log(`Email ${credentials.email} found!`);
+        const creds = await database.Employee_select(email, empid);
+        const hashedPassword = creds.password;
+
+        console.log(`Password: ${password} Hashed: ${hashedPassword}`);
+
+        // compare/check encrypted password
+        if (await bcrypt.compare(password, hashedPassword)) {
+            
+            // [FOR LATER]
+            // save session
+            /*
+            session = req.session;
+            session.userid = creds.userid;
+            session.username = creds.username;
+            session.savings = accountSavings;
+            console.log(req.session);
+            */
+
+           res.status(300).send();
+           // no redirect
+           // res.redirect('/bank');
+        }
+        else {
+            console.log('Invalid password');
+            res.status(403).send('Invalid password');
+            return;
+        }
+    }
+})
+
 router.get('/signup', (req, res) => {
     res.render('em-signup');
 })
