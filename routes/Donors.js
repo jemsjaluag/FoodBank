@@ -9,17 +9,17 @@ const Database = require('../dbController');
 
 const database = new Database();
 
-router.get('/login-page', (req, res) => {
+router.get('/login', (req, res) => {
     res.render('donor-login');
 })
 
 // get signup page
-router.get('/signup-page', (req, res) => {
+router.get('/signup', (req, res) => {
     res.render('donor-signup');
 })
 
 // signup 
-router.post('/signup-page', async (req, res) => {
+router.post('/signup', async (req, res) => {
 
     const credentials = req.body; 
     const email = credentials.email;
@@ -49,7 +49,6 @@ router.post('/signup-page', async (req, res) => {
                 return;
             });
 
-        //database.insert(parcel.username, parcel.password);
         // send OK status
         res.status(300).send();
     }

@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-const loginURL = 'http://localhost:8000/donors/signup-page'
+const signupURL = 'http://localhost:8000/donors/signup'
 
 
 // Function to generate donor ID
@@ -31,6 +31,8 @@ function generateDonorId() {
     return donorId;
 }
 
+// get credentials from input fields.
+// then pass it to backend for processing.
 async function getCredentials(e) {
     e.preventDefault();
     const firstName = first_input.value;
@@ -39,7 +41,7 @@ async function getCredentials(e) {
     const password = password_input.value;
     const donorId = donorID_output.value;
 
-    const res = await fetch(loginURL, {
+    const res = await fetch(signupURL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
