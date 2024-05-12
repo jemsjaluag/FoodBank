@@ -13,6 +13,53 @@ router.get('/login', (req, res) => {
     res.render('donor-login');
 })
 
+router.post('/login', async (req, res) => {
+    const credentials = req.body;
+    const password = credentials.password;
+
+    // find email first
+    const user = await database.User_findUser(credentials.email);
+
+    if (!user.detected) {
+        console.log(`Email ${credentials.email} not found!`);
+        res.status(404).send('User not found!');
+        return;
+    }
+    // if username exists
+    else {
+        // get hashed password and ID
+        console.log(`Email ${credentials.email} found!`);
+        const creds = await database.User_select(credentials.email);
+        const hashedPassword = creds.password;
+
+        // compare/check encrypted password
+        if (await bcrypt.compare(password, hashedPassword)) {
+            
+            // [FOR LATER]
+            // save session
+            /*
+            session = req.session;
+            session.userid = creds.userid;
+            session.username = creds.username;
+            session.savings = accountSavings;
+            console.log(req.session);
+            */
+
+           res.status(300).send();
+           // no redirect
+           // res.redirect('/bank');
+        }
+        else {
+            console.log('Invalid password');
+            res.status(403).send('Invalid password');
+            return;
+        }
+
+
+    }
+
+})
+
 // get signup page
 router.get('/signup', (req, res) => {
     res.render('donor-signup');
@@ -53,6 +100,11 @@ router.post('/signup', async (req, res) => {
         res.status(300).send();
     }
 
+})
+
+
+router.get('/homepage', (req, res) => {
+    render('homepage');
 })
 
 module.exports = router;

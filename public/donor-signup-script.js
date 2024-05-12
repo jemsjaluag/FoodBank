@@ -35,11 +35,19 @@ function generateDonorId() {
 // then pass it to backend for processing.
 async function getCredentials(e) {
     e.preventDefault();
+
     const firstName = first_input.value;
     const lastName = last_input.value;
     const email = email_input.value;
     const password = password_input.value;
     const donorId = donorID_output.value;
+
+    // check if fields are empty
+    if (firstName == '' || lastName == '' || email == '' || password == '' ) {
+        alert('Some fields are empty.');
+        first_input.value = ''; last_input.value = ''; email_input.value = ''; password_input = '';
+        return;
+    }
 
     const res = await fetch(signupURL, {
         method: 'POST',

@@ -5,11 +5,37 @@ const submitBtn = document.getElementById('submitBtn');
 
 
 document.addEventListener('DOMContentLoaded', () => {
-
+    submitBtn.addEventListener('click', loginUser);
 })
 
 const loginURL = 'http://localhost:8000/donors/login'
 
 async function loginUser(e){
+    e.preventDefault();
 
+    const email = email_input.value;
+    const donorid = donorid_input.value;
+    const password = password_input.value;
+
+    const res = await fetch(loginURL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password,
+            donorid: donorid
+        })
+    })
+
+    // report
+    if (res.status == 300){
+
+        // replace window with the homepage.
+        // sort of a 'redirect' to a link.
+        // done from the client side / front end.
+        window.location.href = `http://localhost:8080/bank`
+
+    }
 }

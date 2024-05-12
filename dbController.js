@@ -121,7 +121,7 @@ class DBController {
 
     };
 
-    // retrieve a User
+    // look for a Donor with an email
     async User_findUser(donEmail) {
         this.#sequelize.sync();
 
@@ -136,11 +136,37 @@ class DBController {
 
         if (!result) {
             console.log('No user detected!');
-            return {detected: false, res: null};
+            return {detected: false};
         }
         else {
             console.log(`User with the email ${donEmail} exists!`);
-            return {detected: true, res: result};
+            return {detected: true};
+        }
+
+    };
+
+    // retrieve a User
+    async User_select(donEmail) {
+        this.#sequelize.sync();
+
+        let result = await this.#User.findOne({
+            where: {
+                donorEmail: donEmail,
+            },
+            raw: true
+        }).catch((error) => {
+            console.log('Failed to retrieve data', error);
+        });
+
+        if (!result) {
+            console.log('No user detected!');
+            return {detected: false};
+        }
+        else {
+            console.log(`User with the email ${donEmail} exists!`);
+            return {detected: true,
+                    password: result.password,
+                    donorid: result.donorID };
         }
 
     };
