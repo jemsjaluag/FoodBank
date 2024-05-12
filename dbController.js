@@ -165,7 +165,7 @@ class DBController {
         else {
             console.log(`User with the email ${donEmail} exists!`);
             return {detected: true,
-                    password: result.password,
+                    password: result.donorPassword,
                     donorid: result.donorID };
         }
 

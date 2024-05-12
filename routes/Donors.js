@@ -32,6 +32,8 @@ router.post('/login', async (req, res) => {
         const creds = await database.User_select(credentials.email);
         const hashedPassword = creds.password;
 
+        console.log(`Password: ${password} Hashed: ${hashedPassword}`);
+
         // compare/check encrypted password
         if (await bcrypt.compare(password, hashedPassword)) {
             
@@ -104,7 +106,7 @@ router.post('/signup', async (req, res) => {
 
 
 router.get('/homepage', (req, res) => {
-    render('homepage');
+    res.render('homepage');
 })
 
 module.exports = router;

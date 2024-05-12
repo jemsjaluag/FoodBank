@@ -35,7 +35,21 @@ async function loginUser(e){
         // replace window with the homepage.
         // sort of a 'redirect' to a link.
         // done from the client side / front end.
-        window.location.href = `http://localhost:8080/bank`
+        window.location.href = `http://localhost:8000/donors/homepage`
+    }
+    else if (res.status == 403){
+        email_input.value = '';
+        password_input.value = '';
+        donorid_input.value = '';
 
+        alert('Invalid password!');
+
+    }
+    else if (res.status = 404){
+        email_input.value = '';
+        password_input.value = '';
+        donorid_input.value = '';
+
+        alert('Invalid credentials / User not found!');
     }
 }
