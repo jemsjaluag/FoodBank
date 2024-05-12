@@ -6,11 +6,13 @@ const quantity = document.getElementById('quantity');
 document.addEventListener('DOMContentLoaded', () => {
     
     submitBtn.addEventListener('click', label);
+
 })
 
 
 
-function label() {
+function label(e) {
+    e.preventDefault();
 
     // label -> labelDiv -> labels
     var label = document.createElement('label');

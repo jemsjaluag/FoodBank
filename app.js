@@ -20,14 +20,7 @@ app.use('/donors', donorRoutes);
 
 
 app.get('/', (req, res) => {
-   // res.sendFile('public/welcome-page.html', {root:__dirname});
    res.render('welcome-page');
-})
-
-// employee signin
-app.get('/employeeLoginPage', (req, res) => {
-  //  res.send('<h1>Employees Signin</h1>')
-    res.render('em-login');
 })
 
 
