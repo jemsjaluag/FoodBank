@@ -30,15 +30,6 @@ app.get('/employeeLoginPage', (req, res) => {
     res.render('em-login');
 })
 
-// donors signin
-app.get('/donorLoginPage', (req, res) => {
-   // res.send('<h1>Donor Signin</h1>');
-    res.render('donor-login');
-})
-
-app.get('/donorSignupPage' , (req, res) => {
-    res.render('donor-signup');
-})
 
 app.get('/data-input', (req, res) => {
     res.render('data-input');

@@ -73,9 +73,10 @@ router.post('/signup', async (req, res) => {
     const credentials = req.body; 
     const email = credentials.email;
     const password = credentials.password;
+    const donorId = credentials.donorId;
 
     // check email first
-    const result = await database.User_findUser(email);
+    const result = await database.User_findUser(email, donorId);
 
     if (result.detected){
         console.log('User detected in db');

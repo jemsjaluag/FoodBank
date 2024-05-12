@@ -28,7 +28,8 @@ class DBController {
             this.#db, this.#user, this.#pass,
             {
                 host: this.#hostname,
-                dialect: 'mysql'
+                dialect: 'mysql',
+                logging: false
             }
         );
 
@@ -79,7 +80,7 @@ class DBController {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            password: {
+            employeePassword: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
@@ -122,12 +123,13 @@ class DBController {
     };
 
     // look for a Donor with an email
-    async User_findUser(donEmail) {
+    async User_findUser(donEmail, donorid) {
         this.#sequelize.sync();
 
         let result = await this.#User.findOne({
             where: {
                 donorEmail: donEmail,
+                donorID: donorid
             },
             raw: true
         }).catch((error) => {
@@ -142,16 +144,16 @@ class DBController {
             console.log(`User with the email ${donEmail} exists!`);
             return {detected: true};
         }
-
     };
 
     // retrieve a User
-    async User_select(donEmail) {
+    async User_select(donEmail, donorid) {
         this.#sequelize.sync();
 
         let result = await this.#User.findOne({
             where: {
                 donorEmail: donEmail,
+                donorID: donorid
             },
             raw: true
         }).catch((error) => {
@@ -172,29 +174,52 @@ class DBController {
     };
 
     // insert an Employee
-    async Employee_insert(empFirst, empLast, empPass, empEmail, empID) {
+    async Employee_insert(employee) {
         this.#sequelize.sync();
 
         await this.#Employee.create({
-            employeeEmail: empEmail,
-            employeePassword: empPass,
-            employeeID: empID,
-            employeeFirst: empFirst,
-            employeeLast: empLast
+            employeeEmail: employee.empEmail,
+            employeePassword: employee.empPass,
+            employeeID: employee.empId,
+            employeeFirst: employee.empFirst,
+            employeeLast: employee.empLast
 
         }).then(() => {
-            console.log(`User ${user} added.`);
+            console.log(`User ${employee.empEmail} added.`);
         });
     };
 
-    // retrieve an Employee
-    async Employee_select(empEmail, empPass, empID) {
+    // look for an Employee with an email
+    async Employee_findUser(empEmail, empid) {
         this.#sequelize.sync();
 
         let result = await this.#Employee.findOne({
             where: {
                 employeeEmail: empEmail,
-                employeePassword: empPass,
+                employeeID: empid
+            },
+            raw: true
+        }).catch((error) => {
+            console.log('Failed to retrieve data', error);
+        });
+
+        if (!result) {
+            console.log('No user detected!');
+            return {detected: false};
+        }
+        else {
+            console.log(`User with the email ${empEmail} exists!`);
+            return {detected: true};
+        }
+    };
+
+    // retrieve an Employee
+    async Employee_select(empEmail, empID) {
+        this.#sequelize.sync();
+
+        let result = await this.#Employee.findOne({
+            where: {
+                employeeEmail: empEmail,
                 employeeID: empID
             },
             raw: true
@@ -208,7 +233,9 @@ class DBController {
         }
         else {
             console.log(`User retrieved: ${result.username}`);
-            return {detected: true, res: result};
+            return {detected: true,
+                    password: result.employeePassword,
+                    employeeid: result.employeeID};
         }
     };
 

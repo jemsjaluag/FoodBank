@@ -10,7 +10,7 @@ db = process.env.DB_DATABASE;
 port = process.env.DB_PORT;
 
 
-sequelize = new Sequelize(
+var sequelize = new Sequelize(
     db, user, pass,
     {
         host: hostname,
@@ -63,7 +63,7 @@ Employee = sequelize.define('employees', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    empPassword: {
+    employeePassword: {
         type: DataTypes.STRING,
         allowNull: false
     },
