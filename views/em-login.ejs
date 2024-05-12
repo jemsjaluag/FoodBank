@@ -122,13 +122,13 @@
             <header>Welcome Employees! Login:</header>
         </div>
         <div class="input-box">
-            <input type="text" class="input-field" placeholder="Email" autocomplete="off" required>
+            <input type="text" id="email-input" class="input-field" placeholder="Email" autocomplete="off" required>
         </div>
 	<div class="input-box">
-            <input type="employee id" class="input-field" placeholder="Employee ID" autocomplete="off" required>
+            <input type="employee id" id="employee-id" class="input-field" placeholder="Employee ID" autocomplete="off" required>
         </div>
 	 <div class="input-box">
-            <input type="password" class="input-field" placeholder="Password" autocomplete="off" required>
+            <input type="password" class="input-field" id="password-input" placeholder="Password" autocomplete="off" required>
         </div>
 	
         <div class="forgot">
@@ -141,12 +141,13 @@
             </section>
         </div>
         <div class="input-submit">
-            <button class="submit-btn" id="submit"></button>
-            <label for="submit">Sign In</label>
+            <button class="submit-btn" id="submit-btn"></button>
+            <label>Sign In</label>
         </div>
 	<div class="sign-up-link">
-            <p>Don't have an account? <a href="#">Sign Up</a></p>
+            <p>Don't have an account? <a href="/employees/signup">Sign Up</a></p>
         </div>
     </div>
+	<script src="/em-login-script.js"></script>
 </body>
 </html>

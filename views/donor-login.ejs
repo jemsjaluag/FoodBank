@@ -122,13 +122,13 @@
             <header>Welcome Donors! Login:</header>
         </div>
         <div class="input-box">
-            <input type="text" class="input-field" placeholder="Email" autocomplete="off" required>
+            <input type="text" class="input-field" id="email-input" placeholder="Email" autocomplete="off" required>
         </div>
 	<div class="input-box">
-            <input type="donor id" class="input-field" placeholder="Donor ID" autocomplete="off" required>
+            <input type="donor id" class="input-field" id="donorid-input" placeholder="Donor ID" autocomplete="off" required>
         </div>
 	 <div class="input-box">
-            <input type="password" class="input-field" placeholder="Password" autocomplete="off" required>
+            <input type="password" class="input-field" id="password-input" placeholder="Password" autocomplete="off" required>
         </div>
         <div class="forgot">
             <section>
@@ -140,12 +140,13 @@
             </section>
         </div>
         <div class="input-submit">
-            <button class="submit-btn" id="submit"></button>
+            <button class="submit-btn" id="submitBtn"></button>
             <label for="submit">Sign In</label>
         </div>
 	<div class="sign-up-link">
-            <p>Don't have an account? <a href="#">Sign Up</a></p>
+            <p>Don't have an account? <a href="/donors/signup">Sign Up</a></p>
         </div>
     </div>
+	<script src="/donor-login-script.js"></script>
 </body>
 </html>

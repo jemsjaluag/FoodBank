@@ -10,7 +10,7 @@ db = process.env.DB_DATABASE;
 port = process.env.DB_PORT;
 
 
-sequelize = new Sequelize(
+var sequelize = new Sequelize(
     db, user, pass,
     {
         host: hostname,
@@ -25,13 +25,45 @@ sequelize.authenticate().then(() => {
     console.error('Unable to connect to the database: ', error);
 });
 
-// define employee model
-Employee = sequelize.define('employees', {
-    employee: {
+ // define the user model
+ User = sequelize.define('user', {
+    donorEmail: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    password: {
+    donorPassword: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    donorFirst: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    donorLast: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    donorID: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
+});
+
+// define employee model
+Employee = sequelize.define('employees', {
+    employeeEmail: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    employeeFirst: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    employeeLast: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    employeePassword: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -41,7 +73,7 @@ Employee = sequelize.define('employees', {
     }
 });
 
-sequelize.sync().then(() => {
+sequelize.sync( {force: true} ).then(() => {
     console.log('Tables created sucessfully');
 }).catch((error)=> {
     console.error('Unable to create tables.', error);

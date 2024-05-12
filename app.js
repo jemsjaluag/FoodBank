@@ -6,10 +6,17 @@ const app = express();
 app.use(express.json());
 
 // serving public file
-app.use(express.static('public'));
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'ejs');
 
+ ///// routes
+const employeeRoutes = require('./routes/Employees');
+const donorRoutes = require('./routes/Donors')
+
+app.use('/employees', employeeRoutes);
+app.use('/donors', donorRoutes);
 
 
 app.get('/', (req, res) => {
@@ -18,16 +25,11 @@ app.get('/', (req, res) => {
 })
 
 // employee signin
-app.get('/employeeLogins', (req, res) => {
+app.get('/employeeLoginPage', (req, res) => {
   //  res.send('<h1>Employees Signin</h1>')
     res.render('em-login');
 })
 
-// donors signin
-app.get('/donorLogins', (req, res) => {
-   // res.send('<h1>Donor Signin</h1>');
-    res.render('donor-login');
-})
 
 app.get('/data-input', (req, res) => {
     res.render('data-input');

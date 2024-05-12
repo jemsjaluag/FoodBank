@@ -11,10 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function label() {
+
+    // label -> labelDiv -> labels
     var label = document.createElement('label');
+    label.style.fontSize = '17px';
     label.innerHTML = `${choice.value}: ${quantity.value}\n`;
 
-    var labelDiv = document.getElementById('label-here');
-
+    var labelDiv = document.createElement('div');
     labelDiv.appendChild(label);
+
+    var labels = document.getElementById('label-here');
+
+    labels.appendChild(labelDiv);
 }
