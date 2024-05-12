@@ -13,6 +13,7 @@ class DBController {
     #sequelize;
     #User;
     #Employee;
+    #Transactions;
     
 
     constructor(){
@@ -89,6 +90,34 @@ class DBController {
                 allowNull: false
             }
         });
+
+        this.#Transactions = this.#sequelize.define('transactions', {
+            packaged: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0,
+                allowNull: false
+            },
+            fruits: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0,
+                allowNull: false
+            },
+            veggies: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0,
+                allowNull: false
+            },
+            beverages: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0,
+                allowNull: false
+            }
+        })
+
+        // on-to-many association
+        this.#User.hasMany(Transactions);
+        this.#Transactions.belongsTo(User);
+
 
         this.#sequelize.sync().then(() => {
             console.log('Tables created sucessfully');
@@ -238,6 +267,25 @@ class DBController {
                     employeeid: result.employeeID};
         }
     };
+
+
+    // Transaction
+    async Transaction_insert(transaction){
+        this.#sequelize.sync();
+
+        await this.#Transactions.create({
+            packaged: transaction.packaged,
+            fruits: transaction.fruits,
+            veggies: transaction.veggies,
+            beverages: transaction.beverages,
+            user: transaction.user
+        }, { 
+            include: this.#User
+        },
+        ).then(() => {
+            console.log(`User ${user} added.`);
+        });
+    }
 
     // close all connections
     async closeConnection(){

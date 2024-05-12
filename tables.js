@@ -73,6 +73,33 @@ Employee = sequelize.define('employees', {
     }
 });
 
+Transactions = sequelize.define('transactions', {
+    packaged: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        allowNull: false
+    },
+    fruits: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        allowNull: false
+    },
+    veggies: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        allowNull: false
+    },
+    beverages: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        allowNull: false
+    }
+})
+
+
+User.hasMany(Transactions);
+Transactions.belongsTo(User);
+
 sequelize.sync( {force: true} ).then(() => {
     console.log('Tables created sucessfully');
 }).catch((error)=> {
