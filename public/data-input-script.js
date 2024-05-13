@@ -120,10 +120,13 @@ async function submitList(){
             veggies: veggies,
             packaged: packaged,
         })
+    }).then(() => {
+
+        alert('Thank you for your generous donation!');
+        while (list.firstChild) {
+            list.removeChild(list.firstChild);
+        }
+
     });
 
-    alert('Thank you for your generous donation!');
-    list.children = null;
-
-    
 }
