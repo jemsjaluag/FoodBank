@@ -291,6 +291,17 @@ class DBController {
         });
     }
 
+    async Transaction_get(userid) {
+        this.#sequelize.sync();
+        await this.#Transactions.findAll({
+            where: {
+                userId: userid
+            }
+        }).then((result) => {
+            console.log(result);
+        })
+    }
+
     // close all connections
     async closeConnection(){
         await this.#sequelize.close();
