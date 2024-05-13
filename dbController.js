@@ -293,7 +293,7 @@ class DBController {
 
     async Transaction_get(userid) {
         this.#sequelize.sync();
-        await this.#Transactions.findAll({
+        const res = await this.#Transactions.findAll({
             where: {
                 userId: userid
             },
@@ -302,7 +302,11 @@ class DBController {
 
         }).then((result) => {
             console.log('Success!');
+            return result;
         })
+
+        if (res)    {return res;}
+        else        {console.log('No transactions extracted.')};
     }
 
     // close all connections

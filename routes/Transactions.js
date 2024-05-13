@@ -25,6 +25,7 @@ router.get('/get-transactions', async (req, res) => {
     console.log(result);
 
     res.json(result);
+
 })
 
 

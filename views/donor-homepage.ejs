@@ -26,9 +26,10 @@
     }
 
     .form-div {
-        padding: 30px 60px 30px 60px;
+        padding: 10px 60px 30px 60px;
         border: 2px solid;
-        width: auto;
+        width: 600px;
+        min-height: 400px;
     }
 
     .text-box {
@@ -36,6 +37,11 @@
         height: auto;
         align-items: center;
         padding-left: 70px;
+    }
+
+    .container {
+        display: grid;
+        align-items: start;
     }
 
     p {
@@ -54,8 +60,20 @@
     }
 
     .input-form {
-        width: 300px;
+        width: auto;
+        max-width: 450px;
         align-items: center;
+        text-align: center;
+        margin: auto;
+    }
+    .list {
+        max-width: 400px;
+    }
+    li {
+        display: block;
+        float: left;
+        max-width: 400px;
+        border: #69271E 1px solid;
     }
 
     select {
@@ -83,17 +101,14 @@
 
     <div class="main-div">
         <div>
-            <h1>Donor's Homepage</h1>
-        </div>
-        <div>
-            <h1>Welcome, <%= session.first %>
+            <h1>Welcome, <%= session.first %>!</h1>
         </div>
         <div class="form-div">
             <form>
                 <div class="container">
 
                     <h2>
-                        Enter donation:
+                        Donate to the Food Bank
                     </h2>
                     <div class="input-form">
                         <div class="padded">
@@ -102,23 +117,24 @@
                             </header>
                         </div>
 
+                        <div>
+                            <h2 for="">Previous donations</h2>
+                        </div>
+
                         <div class="padded">
                             <button class="get-btn" id="get-btn">Get</button>
                         </div>
                         <div>
-                            <ul id="list"></ul>
+                            <ul class="list" id="list">
+                            </ul>
                         </div>
                     </div>
                 </div>
-
             </form>
         </div>
-        <a href="/donors/homepage">Go back to Homepage</a>
     </div>
 
-    <ul id="list"></ul>
-
-    <script src="/homepage-script.js"></script>
+    <script src="/homepage2-script.js"></script>
 </body>
 
 </html>
