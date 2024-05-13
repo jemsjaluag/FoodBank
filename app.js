@@ -65,6 +65,10 @@ app.get('/', (req, res) => {
     
 })
 
+app.get('/terms', (req, res) => {
+    res.render('terms');
+})
+
 // send session details to the backend
 app.post('/session', (req, res) => {
     session = req.body.session;
