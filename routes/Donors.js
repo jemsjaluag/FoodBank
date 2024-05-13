@@ -13,6 +13,8 @@ router.get('/login', (req, res) => {
     res.render('donor-login');
 })
 
+
+// login donors
 router.post('/login', async (req, res) => {
     const credentials = req.body;
     const password = credentials.password;
@@ -39,15 +41,11 @@ router.post('/login', async (req, res) => {
         // compare/check encrypted password
         if (await bcrypt.compare(password, hashedPassword)) {
             
-            // [FOR LATER]
             // save session
-            /*
             session = req.session;
-            session.userid = creds.userid;
-            session.username = creds.username;
-            session.savings = accountSavings;
+            session.userid = creds.donorid;
+            session.first = creds.first;
             console.log(req.session);
-            */
 
            res.status(300).send();
            // no redirect
@@ -106,7 +104,7 @@ router.post('/signup', async (req, res) => {
 
 
 router.get('/homepage', (req, res) => {
-    res.render('homepage');
+    res.render('homepage', {session: req.session});
 })
 
 module.exports = router;

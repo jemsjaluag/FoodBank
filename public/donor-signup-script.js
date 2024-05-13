@@ -79,7 +79,3 @@ async function getCredentials(e) {
 
 }
 
-
-// Set generated employee ID to input field
-//document.getElementById('donorId').value = generateDonorId();
-//document.getElementById("check").required = true;

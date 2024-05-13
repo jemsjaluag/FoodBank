@@ -115,8 +115,8 @@ class DBController {
         })
 
         // on-to-many association
-        this.#User.hasMany(Transactions);
-        this.#Transactions.belongsTo(User);
+        this.#User.hasMany(this.#Transactions);
+        this.#Transactions.belongsTo(this.#User);
 
 
         this.#sequelize.sync().then(() => {
@@ -197,7 +197,8 @@ class DBController {
             console.log(`User with the email ${donEmail} exists!`);
             return {detected: true,
                     password: result.donorPassword,
-                    donorid: result.donorID };
+                    donorid: result.donorID,
+                    first: result.donorFirst };
         }
 
     };
@@ -264,7 +265,8 @@ class DBController {
             console.log(`User retrieved: ${result.employeeEmail}`);
             return {detected: true,
                     password: result.employeePassword,
-                    employeeid: result.employeeID};
+                    employeeid: result.employeeID,
+                    first: result.employeeFirst};
         }
     };
 
