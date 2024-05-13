@@ -120,7 +120,7 @@ async function submitList(){
             veggies: veggies,
             packaged: packaged,
         })
-    })
+    });
 
     alert('Thank you for your generous donation!');
     list.children = null;
