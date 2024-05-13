@@ -10,6 +10,7 @@ var session = null;
 // insert a transaction.
 // taken from the inputs of the donor from frontend.
 router.post('/insert', async (req, res) => {
+
     transaction = req.body;
     session = req.session;
 
@@ -24,6 +25,13 @@ router.post('/insert', async (req, res) => {
 
 // get all the transactions done by the donor.
 router.get('/get-transactions', async (req, res) => {
+
+    // only donors can access this route.
+    if (!(req.session.status == 'donor') || req.session.status == undefined){
+        res.redirect('/');
+        return;
+    }
+
     session = req.session;
     const result = await database.Transaction_get(session.userid);
 
@@ -35,6 +43,13 @@ router.get('/get-transactions', async (req, res) => {
 
 // get everything
 router.get('/getAll-transactions', async (req, res) => {
+
+    // only employees can access this route.
+    if (!(req.session.status == 'employee') || req.session.status == undefined){
+        res.redirect('/');
+        return;
+    }
+
     session = req.session;
     const result = await database.Transaction_getAll();
     console.log(result);

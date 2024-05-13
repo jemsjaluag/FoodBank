@@ -20,7 +20,7 @@ async function getAll(){
         method: 'GET'
     });
 
-    console.log(res);
+   // console.log(res);
 
     // use var or let variable types to catch promises ffs.
     // otherwise value will not change.
@@ -56,7 +56,7 @@ async function getAllUsers() {
         method: 'GET'
     });
 
-    console.log(res);
+   // console.log(res);
 
     var users = await res.json();
     console.log(users) ;

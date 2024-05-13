@@ -5,17 +5,19 @@ const bcrypt = require('bcrypt');
 const path = require('path');
 const Database = require('../dbController');
 
-//const Database = require('./dbController');
+var session = null;
 
 const database = new Database();
 
 router.get('/login', (req, res) => {
+    
     res.render('donor-login');
 })
 
 
 // login donors
 router.post('/login', async (req, res) => {
+
     const credentials = req.body;
     const password = credentials.password;
     const email = credentials.email;
@@ -62,6 +64,7 @@ router.post('/login', async (req, res) => {
 
 // get signup page
 router.get('/signup', (req, res) => {
+
     res.render('donor-signup');
 })
 
@@ -104,15 +107,43 @@ router.post('/signup', async (req, res) => {
 })
 
 
+/// route to the donor homepage
 router.get('/homepage', (req, res) => {
+    
+    // only donors can access this route.
+    // session.userid is a donor exclusive session property.
+    if (!(req.session.status == 'donor') || req.session.status == undefined){
+        res.redirect('/');
+        return;
+    }
+
     res.render('donor-homepage', {session: req.session});
 })
 
+/// route to the data input URL/page
 router.get('/data-input', (req, res) => {
+
+    // only donors can access this route.
+    if (!(req.session.status == 'donor') || req.session.status == undefined){
+        res.redirect('/');
+        return;
+    }
+
     res.render('data-input');
 })
 
+/// route for getting all the donors from the database
 router.get('/getAll', async (req, res) => {
+
+    // only employees can access this route.
+    if (!(req.session.status == 'employee') || req.session.status == undefined){
+        res.redirect('/');
+        return;
+    }
+    
+
+    console.log(req.session.status);
+
     const result = await database.User_getAll();
     console.log(result);
 

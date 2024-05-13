@@ -15,6 +15,7 @@ router.get('/login', (req, res) => {
 
 // login employees
 router.post('/login', async (req, res) => {
+
     const credentials = req.body;
     const email = credentials.email;
     const password = credentials.password;
@@ -62,6 +63,8 @@ router.post('/login', async (req, res) => {
     }
 })
 
+
+// render signup page
 router.get('/signup', (req, res) => {
     res.render('em-signup');
 })
@@ -88,8 +91,6 @@ router.post('/signup', async (req, res) => {
 
         console.log(`${credentials.email} ${credentials.password} ${credentials.employeeId}`);
 
-
-        
         bcrypt.hash(password, 10)
             .then((hash) => {
                 database.Employee_insert({  empFirst: credentials.firstName,
@@ -102,7 +103,6 @@ router.post('/signup', async (req, res) => {
                 res.status(404).send();
                 return;
             });
-            
 
         // send OK status
         res.status(300).send();
@@ -111,9 +111,15 @@ router.post('/signup', async (req, res) => {
 })
 
 router.get('/homepage', (req, res) => {
+
+    // only employees can access this route.
+    if (!(req.session.status == 'employee') || req.session.status == undefined){
+        res.redirect('/');
+        return;
+    }
+
     res.render('emp-homepage', {session: req.session});
 })
 
-router
 
 module.exports = router;
