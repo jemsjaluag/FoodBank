@@ -26,6 +26,12 @@ app.use(sessions({
     resave: false
 }));
 
+// middleware to prevent browser caching
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    next();
+})
+
 var session = null;     // session
 
 // cookie parser middleware
