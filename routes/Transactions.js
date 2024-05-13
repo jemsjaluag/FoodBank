@@ -18,5 +18,9 @@ router.post('/insert', async (req, res) => {
                 });
 })
 
+router.post('/get-transactions', async (req, res) => {
+    const result = database.Transaction_get(session.userid);
+})
+
 
 module.exports = router;
