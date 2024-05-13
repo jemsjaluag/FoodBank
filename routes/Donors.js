@@ -43,7 +43,7 @@ router.post('/login', async (req, res) => {
             
             // save session
             session = req.session;
-            session.id = creds.id;
+            session.userid = creds.id;
             session.first = creds.first;
             session.status = 'donor';
             console.log(req.session);

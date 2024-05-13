@@ -34,9 +34,11 @@ app.use(cookieParser());
 ////// routes
 const employeeRoutes = require('./routes/Employees');
 const donorRoutes = require('./routes/Donors')
+const transactionRoutes = require('./routes/Transactions');
 
 app.use('/employees', employeeRoutes);
 app.use('/donors', donorRoutes);
+app.use('/transactions', transactionRoutes);
 
 
 // Home (default page)

@@ -274,7 +274,7 @@ class DBController {
 
 
     // Transaction
-    async Transaction_insert(transaction){
+    async Transaction_insert(transaction, userid){
         this.#sequelize.sync();
 
         await this.#Transactions.create({
@@ -282,12 +282,12 @@ class DBController {
             fruits: transaction.fruits,
             veggies: transaction.veggies,
             beverages: transaction.beverages,
-            user: transaction.user
+            userId: userid
         }, { 
             include: this.#User
         },
         ).then(() => {
-            console.log(`User ${user} added.`);
+            console.log(`Transaction added.`);
         });
     }
 

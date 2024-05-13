@@ -1,5 +1,6 @@
 
 const queueBtn = document.getElementById('queueBtn');
+const submitBtn = document.getElementById('submitBtn')
 const choice = document.getElementById('data-input');
 const quantity = document.getElementById('quantity');
 const list = document.getElementById('list');
@@ -7,6 +8,7 @@ const list = document.getElementById('list');
 document.addEventListener('DOMContentLoaded', () => {
     
     queueBtn.addEventListener('click', getInput);
+    submitBtn.addEventListener('click', submitList);
 
 })
 
@@ -16,7 +18,7 @@ var fruits = 0;
 var veggies = 0;
 var packaged = 0;
 
-const transactionURL = 'http://localhost:8000/transaction/insert'
+const transactionURL = 'http://localhost:8000/transactions/insert'
 
 function getInput(e) {
 
@@ -100,7 +102,7 @@ async function submitList(){
         return;
     }
 
-    const res = await fetch(signupURL, {
+    const res = await fetch(transactionURL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
