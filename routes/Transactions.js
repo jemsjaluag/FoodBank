@@ -6,6 +6,9 @@ const database = new Database();
 
 var session = null;
 
+
+// insert a transaction.
+// taken from the inputs of the donor from frontend.
 router.post('/insert', async (req, res) => {
     transaction = req.body;
     session = req.session;
@@ -18,6 +21,8 @@ router.post('/insert', async (req, res) => {
                 });
 })
 
+
+// get all the transactions done by the donor.
 router.get('/get-transactions', async (req, res) => {
     session = req.session;
     const result = await database.Transaction_get(session.userid);
@@ -26,6 +31,15 @@ router.get('/get-transactions', async (req, res) => {
 
     res.json(result);
 
+})
+
+// get everything
+router.get('/getAll-transactions', async (req, res) => {
+    session = req.session;
+    const result = await database.Transaction_getAll();
+    console.log(result);
+
+    res.json(result);
 })
 
 

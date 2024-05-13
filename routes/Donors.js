@@ -108,4 +108,8 @@ router.get('/homepage', (req, res) => {
     res.render('donor-homepage', {session: req.session});
 })
 
+router.get('/data-input', (req, res) => {
+    res.render('data-input');
+})
+
 module.exports = router;

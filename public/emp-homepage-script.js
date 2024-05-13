@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     getAll();
 })
 
-getURL = 'http://localhost:8000/transactions/get-transactions';
+getURL = 'http://localhost:8000/transactions/getAll-transactions';
 
 
 // function to get all of the transaction done by the donor

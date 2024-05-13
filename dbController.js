@@ -309,6 +309,21 @@ class DBController {
         else        {console.log('No transactions extracted.')};
     }
 
+    // just get all of the transaction records
+    async Transaction_getAll() {
+
+        this.#sequelize.sync();
+        const res = await this.#Transactions.findAll({
+            raw: true,
+            subQuery: false
+        }).then((result) => {
+            console.log('Got all!');
+        })
+
+        if (res)    {return res;}
+        else        {console.log('No transactions extracted.')};
+    }
+
     // close all connections
     async closeConnection(){
         await this.#sequelize.close();

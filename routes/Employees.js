@@ -114,4 +114,6 @@ router.get('/homepage', (req, res) => {
     res.render('emp-homepage', {session: req.session});
 })
 
+router
+
 module.exports = router;

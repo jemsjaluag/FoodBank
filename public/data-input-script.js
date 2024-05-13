@@ -20,6 +20,9 @@ var packaged = 0;
 
 const transactionURL = 'http://localhost:8000/transactions/insert'
 
+// get the donations first and make a list.
+// once done, submit it.
+// makes it easier for users to add items while still being limited.
 function getInput(e) {
 
     // limit the items by 5 pieces only
@@ -96,6 +99,10 @@ function getInput(e) {
     }
 }
 
+
+// submit the list.
+// turn the list into json and pass it into backend.
+// backend will receive and use the session to determine who it belongs to.
 async function submitList(){
     if (listCount == 0){
         alert('List is empty!');
@@ -114,6 +121,9 @@ async function submitList(){
             packaged: packaged,
         })
     })
+
+    alert('Thank you for your generous donation!');
+    list.children = null;
 
     
 }

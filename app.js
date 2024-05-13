@@ -64,10 +64,12 @@ app.post('/session', (req, res) => {
     session = req.body.session;
 })
 
-
-app.get('/data-input', (req, res) => {
-    res.render('data-input');
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
 })
+
+
 
 // run server
 app.listen(PORT, function(error) {
