@@ -34,9 +34,11 @@ app.use(cookieParser());
 ////// routes
 const employeeRoutes = require('./routes/Employees');
 const donorRoutes = require('./routes/Donors')
+const transactionRoutes = require('./routes/Transactions');
 
 app.use('/employees', employeeRoutes);
 app.use('/donors', donorRoutes);
+app.use('/transactions', transactionRoutes);
 
 
 // Home (default page)
@@ -62,10 +64,12 @@ app.post('/session', (req, res) => {
     session = req.body.session;
 })
 
-
-app.get('/data-input', (req, res) => {
-    res.render('data-input');
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
 })
+
+
 
 // run server
 app.listen(PORT, function(error) {

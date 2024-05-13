@@ -198,10 +198,27 @@ class DBController {
             return {detected: true,
                     password: result.donorPassword,
                     donorid: result.donorID,
+                    id: result.id,
                     first: result.donorFirst };
         }
 
     };
+
+    // just get all of the transaction records
+    async User_getAll() {
+
+        this.#sequelize.sync();
+        const res = await this.#User.findAll({
+            raw: true,
+            subQuery: false
+        }).then((result) => {
+            console.log('Got all!');
+            return result;
+        })
+
+        if (res)    {return res;}
+        else        {console.log('No transactions extracted.')};
+    }
 
     // insert an Employee
     async Employee_insert(employee) {
@@ -266,13 +283,14 @@ class DBController {
             return {detected: true,
                     password: result.employeePassword,
                     employeeid: result.employeeID,
+                    id: result.id,
                     first: result.employeeFirst};
         }
     };
 
 
     // Transaction
-    async Transaction_insert(transaction){
+    async Transaction_insert(transaction, userid){
         this.#sequelize.sync();
 
         await this.#Transactions.create({
@@ -280,13 +298,47 @@ class DBController {
             fruits: transaction.fruits,
             veggies: transaction.veggies,
             beverages: transaction.beverages,
-            user: transaction.user
+            userId: userid
         }, { 
             include: this.#User
         },
         ).then(() => {
-            console.log(`User ${user} added.`);
+            console.log(`Transaction added.`);
         });
+    }
+
+    async Transaction_get(userid) {
+        this.#sequelize.sync();
+        const res = await this.#Transactions.findAll({
+            where: {
+                userId: userid
+            },
+            raw: true,
+            subQuery: false
+
+        }).then((result) => {
+            console.log('Success!');
+            return result;
+        })
+
+        if (res)    {return res;}
+        else        {console.log('No transactions extracted.')};
+    }
+
+    // just get all of the transaction records
+    async Transaction_getAll() {
+
+        this.#sequelize.sync();
+        const res = await this.#Transactions.findAll({
+            raw: true,
+            subQuery: false
+        }).then((result) => {
+            console.log('Got all!');
+            return result;
+        })
+
+        if (res)    {return res;}
+        else        {console.log('No transactions extracted.')};
     }
 
     // close all connections

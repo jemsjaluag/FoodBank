@@ -32,7 +32,7 @@ function generateDonorId() {
 }
 
 // get credentials from input fields.
-// then pass it to backend for processing.
+// then pass it to backend for processing. (signup)
 async function getCredentials(e) {
     e.preventDefault();
 
@@ -45,10 +45,21 @@ async function getCredentials(e) {
     // check if fields are empty
     if (firstName == '' || lastName == '' || email == '' || password == '' ) {
         alert('Some fields are empty.');
-        first_input.value = ''; last_input.value = ''; email_input.value = ''; password_input = '';
+        first_input.value = ''; last_input.value = ''; email_input.value = ''; password_input.value = '';
         return;
     }
 
+    const maxChar = 15;
+
+    // check if input are too long
+    if (firstName.length > maxChar || lastName.length > maxChar || email.length > (maxChar + 10) || 
+        password.length > maxChar) {
+            alert('Some field are too long.');
+            first_input.value = ''; last_input.value = ''; email_input.value = ''; password_input.value = '';
+            return;
+    }
+
+    // fetch to backend
     const res = await fetch(signupURL, {
         method: 'POST',
         headers: {

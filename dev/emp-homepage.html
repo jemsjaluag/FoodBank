@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+</head>
+<style>
+    body {
+        background: #FBC4AB;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+
+    }
+
+    h2 {
+        align-items: center;
+
+    }
+
+    .main-div {
+        margin-top: 20px;
+    }
+
+    .form-div {
+        padding: 10px 60px 30px 60px;
+        border: 2px solid;
+        width: 600px;
+        min-height: 400px;
+    }
+
+    .text-box {
+        width: 300px;
+        height: auto;
+        align-items: center;
+        padding-left: 70px;
+    }
+
+    .container {
+        display: grid;
+        align-items: start;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    a {
+        margin-top: 50px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .padded {
+        padding: 10px;
+
+    }
+
+    .input-form {
+        width: auto;
+        max-width: 450px;
+        align-items: center;
+        text-align: center;
+        margin: auto;
+    }
+    .list {
+        max-width: 400px;
+    }
+    li {
+        display: block;
+        float: left;
+        max-width: 400px;
+        border: #69271E 1px solid;
+    }
+
+    select {
+        font-size: 15px;
+    }
+
+    #showcase .button {
+        font-size: 20px;
+        background: #feaf8b;
+        text-decoration: none;
+        color: #69271E;
+        border: #69271E 1px solid;
+        padding: 10px 20px;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    #showcase .button:hover {
+        background: #69271E;
+        color: #fff;
+    }
+</style>
+
+<body>
+
+    <div class="main-div">
+        <div>
+            <h1>Welcome, <%= session.first %>!</h1>
+        </div>
+        <div class="form-div">
+            <form>
+                <div class="container">
+
+                    <h2>
+                        Donations
+                    </h2>
+                    <div class="input-form">
+                        <div>
+                            <ul class="list" id="list">
+                            </ul>
+                            <ul class="user-list" id="user-list">
+                                <li>TESTTTTT</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <script src="/emp-homepage-script.js"></script>
+</body>
+
+</html>

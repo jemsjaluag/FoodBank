@@ -38,7 +38,7 @@ async function loginUser(e){
         // replace window with the homepage.
         // sort of a 'redirect' to a link.
         // done from the client side / front end.
-        window.location.href = `http://localhost:8000/donors/homepage`
+        window.location.href = `http://localhost:8000/employees/homepage`
     }
     else if (res.status == 403){
         email_input.value = '';
