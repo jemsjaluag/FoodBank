@@ -112,4 +112,11 @@ router.get('/data-input', (req, res) => {
     res.render('data-input');
 })
 
+router.get('/getAll', async (req, res) => {
+    const result = await database.User_getAll();
+    console.log(result);
+
+    res.json(result);
+})
+
 module.exports = router;

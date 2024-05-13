@@ -204,6 +204,22 @@ class DBController {
 
     };
 
+    // just get all of the transaction records
+    async User_getAll() {
+
+        this.#sequelize.sync();
+        const res = await this.#User.findAll({
+            raw: true,
+            subQuery: false
+        }).then((result) => {
+            console.log('Got all!');
+            return result;
+        })
+
+        if (res)    {return res;}
+        else        {console.log('No transactions extracted.')};
+    }
+
     // insert an Employee
     async Employee_insert(employee) {
         this.#sequelize.sync();
@@ -318,6 +334,7 @@ class DBController {
             subQuery: false
         }).then((result) => {
             console.log('Got all!');
+            return result;
         })
 
         if (res)    {return res;}

@@ -66,9 +66,15 @@
         text-align: center;
         margin: auto;
     }
+
     .list {
         max-width: 400px;
     }
+
+    .user-list {
+        max-width: 400px;
+    }
+
     li {
         display: block;
         float: left;
@@ -106,11 +112,17 @@
         <div class="form-div">
             <form>
                 <div class="container">
-
-                    <h2>
-                        Donations
-                    </h2>
                     <div class="input-form">
+                        <h2>
+                            Donors
+                        </h2>
+                        <div>
+                            <ul class="user-list" id="user-list">
+                            </ul>
+                        </div>
+                        <h2>
+                            Donations
+                        </h2>
                         <div>
                             <ul class="list" id="list">
                             </ul>
