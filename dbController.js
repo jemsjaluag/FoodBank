@@ -198,6 +198,7 @@ class DBController {
             return {detected: true,
                     password: result.donorPassword,
                     donorid: result.donorID,
+                    id: result.id,
                     first: result.donorFirst };
         }
 
@@ -266,6 +267,7 @@ class DBController {
             return {detected: true,
                     password: result.employeePassword,
                     employeeid: result.employeeID,
+                    id: result.id,
                     first: result.employeeFirst};
         }
     };

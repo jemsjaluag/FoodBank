@@ -32,7 +32,7 @@ function generateDonorId() {
 }
 
 // get credentials from input fields.
-// then pass it to backend for processing.
+// then pass it to backend for processing. (signup)
 async function getCredentials(e) {
     e.preventDefault();
 

@@ -43,8 +43,10 @@ router.post('/login', async (req, res) => {
             
             // save session
             session = req.session;
-            session.userid = creds.employeeid;
+            session.id = creds.id;
+            session.employeeid = creds.employeeid;
             session.first = creds.first;
+            session.status = 'employee';        // differentiate between employees and donors
             console.log(req.session);
             
 
@@ -106,6 +108,10 @@ router.post('/signup', async (req, res) => {
         res.status(300).send();
     }
 
+})
+
+router.get('/homepage', (req, res) => {
+    res.render('emp-homepage', {session: req.session});
 })
 
 module.exports = router;

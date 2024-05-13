@@ -16,6 +16,8 @@ var fruits = 0;
 var veggies = 0;
 var packaged = 0;
 
+const transactionURL = 'http://localhost:8000/transaction/insert'
+
 function getInput(e) {
 
     // limit the items by 5 pieces only
@@ -92,9 +94,24 @@ function getInput(e) {
     }
 }
 
-function submitList(){
+async function submitList(){
     if (listCount == 0){
         alert('List is empty!');
         return;
     }
+
+    const res = await fetch(signupURL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            beverages: beverages,
+            fruits: fruits,
+            veggies: veggies,
+            packaged: packaged,
+        })
+    })
+
+    
 }
