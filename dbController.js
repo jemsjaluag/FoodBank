@@ -296,9 +296,12 @@ class DBController {
         await this.#Transactions.findAll({
             where: {
                 userId: userid
-            }
+            },
+            raw: true,
+            subQuery: false
+
         }).then((result) => {
-            console.log(result);
+            console.log('Success!');
         })
     }
 

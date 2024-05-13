@@ -18,8 +18,13 @@ router.post('/insert', async (req, res) => {
                 });
 })
 
-router.post('/get-transactions', async (req, res) => {
-    const result = database.Transaction_get(session.userid);
+router.get('/get-transactions', async (req, res) => {
+    session = req.session;
+    const result = await database.Transaction_get(session.userid);
+
+    console.log(result);
+
+    res.json(result);
 })
 
 
