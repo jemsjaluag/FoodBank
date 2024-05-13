@@ -5,11 +5,15 @@ const bcrypt = require('bcrypt');
 const Database = require('../dbController');
 const database = new Database();
 
+var session = null;
 
+// login page
 router.get('/login', (req, res) => {
     res.render('em-login');
 })
 
+
+// login employees
 router.post('/login', async (req, res) => {
     const credentials = req.body;
     const email = credentials.email;
@@ -37,15 +41,12 @@ router.post('/login', async (req, res) => {
         // compare/check encrypted password
         if (await bcrypt.compare(password, hashedPassword)) {
             
-            // [FOR LATER]
             // save session
-            /*
             session = req.session;
-            session.userid = creds.userid;
-            session.username = creds.username;
-            session.savings = accountSavings;
+            session.userid = creds.employeeid;
+            session.first = creds.first;
             console.log(req.session);
-            */
+            
 
            res.status(300).send();
            // no redirect

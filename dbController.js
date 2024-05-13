@@ -13,6 +13,7 @@ class DBController {
     #sequelize;
     #User;
     #Employee;
+    #Transactions;
     
 
     constructor(){
@@ -90,6 +91,34 @@ class DBController {
             }
         });
 
+        this.#Transactions = this.#sequelize.define('transactions', {
+            packaged: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0,
+                allowNull: false
+            },
+            fruits: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0,
+                allowNull: false
+            },
+            veggies: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0,
+                allowNull: false
+            },
+            beverages: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0,
+                allowNull: false
+            }
+        })
+
+        // on-to-many association
+        this.#User.hasMany(this.#Transactions);
+        this.#Transactions.belongsTo(this.#User);
+
+
         this.#sequelize.sync().then(() => {
             console.log('Tables created sucessfully');
         }).catch((error)=> {
@@ -114,7 +143,7 @@ class DBController {
             donorID: donorCreds.donId
 
         }).then(() => {
-            console.log(`User ${donorFirst} added.`);
+            console.log(`User ${donorCreds.donFirst} added.`);
         });
         
         // report
@@ -168,7 +197,8 @@ class DBController {
             console.log(`User with the email ${donEmail} exists!`);
             return {detected: true,
                     password: result.donorPassword,
-                    donorid: result.donorID };
+                    donorid: result.donorID,
+                    first: result.donorFirst };
         }
 
     };
@@ -235,9 +265,29 @@ class DBController {
             console.log(`User retrieved: ${result.employeeEmail}`);
             return {detected: true,
                     password: result.employeePassword,
-                    employeeid: result.employeeID};
+                    employeeid: result.employeeID,
+                    first: result.employeeFirst};
         }
     };
+
+
+    // Transaction
+    async Transaction_insert(transaction){
+        this.#sequelize.sync();
+
+        await this.#Transactions.create({
+            packaged: transaction.packaged,
+            fruits: transaction.fruits,
+            veggies: transaction.veggies,
+            beverages: transaction.beverages,
+            user: transaction.user
+        }, { 
+            include: this.#User
+        },
+        ).then(() => {
+            console.log(`User ${user} added.`);
+        });
+    }
 
     // close all connections
     async closeConnection(){

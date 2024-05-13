@@ -10,55 +10,117 @@
 <style>
     body {
         background: #FBC4AB;
-    }
-    div {
-        padding: 10px;
-        width: 300px;
-    }
-    .input-form {
-        width: 300px;
-    	align-items: center;
-    }
-    select{
-        font-size: 15px;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+
     }
 
+    h2 {
+        align-items: center;
+
+    }
+    .main-div {
+        margin-top: 70px;
+    }
+
+    .form-div {
+        padding: 30px 60px 30px 60px;
+        border: 2px solid;
+        width: auto;
+    }
+
+    .text-box {
+        width: 300px;
+        height: auto;
+        align-items: center;
+        padding-left: 70px;
+    }
+
+    p {
+        text-align: center;
+    }
+    a {
+        margin-top: 50px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .padded {
+        padding: 10px;
+
+    }
+
+    .input-form {
+        width: 300px;
+        align-items: center;
+    }
+
+    select {
+        font-size: 15px;
+    }
 </style>
 
 <body>
-    <form>
-        <div class="container">
+    <div class="main-div">
+        <div class="form-div">
+            <form>
+                <div class="container">
 
-            <h2>
-                Enter donation:
-            </h2>
-            <section>
-                <div class="input-form">
-                    <select name="data-input" id="data-input">
-                        <option value="Canned Goods">Canned Goods</option>
-                        <option value="Veggies">Veggies</option>
-                        <option value="Fruits">Fruits</option>
-                    </select>
-                    <select name="quantity" id="quantity">
-                        <option value=1>1</option>
-                        <option value=2>2</option>
-                        <option value=3>3</option>
-                        <option value=4>4</option>
-                        <option value=5>5</option>
+                    <h2>
+                        Enter donation:
+                    </h2>
+                    <div class="input-form">
+                        <div class="padded">
+                            <select name="data-input" id="data-input">
+                                <option value="Packaged">Packaged/Canned Goods</option>
+                                <option value="Veggies">Veggies</option>
+                                <option value="Fruits">Fruits</option>
+                                <option value="Beverages">Beverages</option>
 
-                    </select>
+                            </select>
+                            <select name="quantity" id="quantity">
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                                <option value=6>6</option>
+                                <option value=7>7</option>
+                                <option value=8>8</option>
+                                <option value=9>9</option>
+                                <option value=10>10</option>
+
+                            </select>
+                        </div>
+                        <div class="padded">
+                            <button class="btn" id="queueBtn" type="button">Add to Queue</button>
+                        </div>
+                        <div>
+                            <ul id="list"></ul>
+                        </div>
+                        <div class="padded">
+                            <button class="btn" id="submitBtn" type="button">Submit</button>
+                        </div>
+
+                    </div>
                 </div>
-            </section>
-            <div>
-                <button class="btn" id="submitBtn" type="button">Submit</button>
-            </div>
-        </div>
 
-    </form>
-    <div>
-        <div id="label-here"></div>
+            </form>
+        </div>
+        <div class="text-box">
+            <p>Please select one food item from the dropdown box and select the quantity.</p>
+            <p>Press the <b>Add to Queue</b> button to add item to the list.</p>
+            <p>Press <b>Submit</b> when done.</p>
+            <p>Limit <b>10</b> pieces per transaction.</p>
+            <p>Limit <b>5</b> items per transaction.</p>
+
+        </div>
+        <a href="/donors/homepage">Go back to Homepage</a>
     </div>
-    <script src="sendlabel.js"></script>
+
+    <script src="data-input-script.js"></script>
 </body>
 
 </html>

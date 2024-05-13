@@ -13,12 +13,16 @@ router.get('/login', (req, res) => {
     res.render('donor-login');
 })
 
+
+// login donors
 router.post('/login', async (req, res) => {
     const credentials = req.body;
     const password = credentials.password;
+    const email = credentials.email;
+    const donorid = credentials.donorid;
 
     // find email first
-    const user = await database.User_findUser(credentials.email);
+    const user = await database.User_findUser(email, donorid);
 
     if (!user.detected) {
         console.log(`Email ${credentials.email} not found!`);
@@ -29,7 +33,7 @@ router.post('/login', async (req, res) => {
     else {
         // get hashed password and ID
         console.log(`Email ${credentials.email} found!`);
-        const creds = await database.User_select(credentials.email);
+        const creds = await database.User_select(email, donorid);
         const hashedPassword = creds.password;
 
         console.log(`Password: ${password} Hashed: ${hashedPassword}`);
@@ -37,15 +41,11 @@ router.post('/login', async (req, res) => {
         // compare/check encrypted password
         if (await bcrypt.compare(password, hashedPassword)) {
             
-            // [FOR LATER]
             // save session
-            /*
             session = req.session;
-            session.userid = creds.userid;
-            session.username = creds.username;
-            session.savings = accountSavings;
+            session.userid = creds.donorid;
+            session.first = creds.first;
             console.log(req.session);
-            */
 
            res.status(300).send();
            // no redirect
@@ -104,7 +104,7 @@ router.post('/signup', async (req, res) => {
 
 
 router.get('/homepage', (req, res) => {
-    res.render('homepage');
+    res.render('homepage', {session: req.session});
 })
 
 module.exports = router;

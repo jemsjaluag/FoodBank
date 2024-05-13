@@ -1,9 +1,13 @@
 const express = require('express');
-const PORT = 8000;
+
+const cookieParser = require('cookie-parser');
+const sessions = require('express-session');
 
 const app = express();
+const PORT = 8000;
 
 app.use(express.json());
+
 
 // serving public file
 const path = require('path');
@@ -11,7 +15,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine', 'ejs');
 
- ///// routes
+// creating 24 hrs from milliseconds
+const oneDay = 1000 * 60 * 60 * 24;
+
+// sessions
+app.use(sessions({
+    secret: 'thisismysecretkey123',
+    saveUninitialized: true,
+    cookie: {maxAge: oneDay},
+    resave: false
+}));
+
+var session = null;     // session
+
+// cookie parser middleware
+app.use(cookieParser());
+
+////// routes
 const employeeRoutes = require('./routes/Employees');
 const donorRoutes = require('./routes/Donors')
 
@@ -19,15 +39,27 @@ app.use('/employees', employeeRoutes);
 app.use('/donors', donorRoutes);
 
 
+// Home (default page)
 app.get('/', (req, res) => {
-   // res.sendFile('public/welcome-page.html', {root:__dirname});
-   res.render('welcome-page');
+
+    session = req.session;
+    console.log(session.userid);
+
+    if (session.status == 'employee') {
+        res.redirect('/employees/homepage');
+    }
+    else if (session.status == 'donor'){
+        res.redirect('/donors/homepage');
+    }
+    else {
+        res.render('welcome-page');
+    }
+    
 })
 
-// employee signin
-app.get('/employeeLoginPage', (req, res) => {
-  //  res.send('<h1>Employees Signin</h1>')
-    res.render('em-login');
+// send session details to the backend
+app.post('/session', (req, res) => {
+    session = req.body.session;
 })
 
 
